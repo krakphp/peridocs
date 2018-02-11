@@ -8,6 +8,16 @@ function docFn(string $name) {
     DocsContext::getInstance()->addDocFn($suite, $name);
 }
 
+/** add aliases for `it` */
+function test(string $desc, Closure $definition = null) {
+    return it($desc, $definition);
+}
+function xtest(string $desc, Closure $definition = null) {
+    return xit($desc, $definition);
+}
+function ftest(string $desc, Closure $definition = null) {
+    return fit($desc, $definition);
+}
 
 function docIntro(string $intro) {
     $suite = Context::getInstance()->getCurrentSuite();
