@@ -2,7 +2,7 @@
 
 namespace Krak\Peridocs;
 
-function addMaybe(int $a, int $b) {
+function addMaybe(int $a, int $b): int {
     return $a == $b ? $a * $a : $a + $b;
 }
 

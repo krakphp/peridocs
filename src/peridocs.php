@@ -2,7 +2,11 @@
 
 namespace Krak\Peridocs;
 
-function bootstrap($emitter) {
+function bootstrap($emitter, callable $createDocsContext = null) {
+    if ($createDocsContext) {
+        DocsContext::setInstance($createDocsContext());
+    }
+
     $emitter->on('peridot.start', function() {
         require_once __DIR__ . '/dsl.php';
     });

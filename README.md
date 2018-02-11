@@ -14,7 +14,14 @@ In your `peridot.php` configuration file, add the following:
 use Krak\Peridocs;
 
 return function($emitter) {
-    Peridocs\bootstrap($emitter);
+    // the second parameter is optional and is used to configure the DocsContext
+    Peridocs\bootstrap($emitter, function() {
+        return new DocsContext(null, [
+            'headerFmt' => '<h3 id="{id}">{signature}</h3>',
+            'showLinks' => false,
+            'nsPrefix' => 'Acme\\Prefix\\'
+        ]);
+    });
 };
 ```
 
@@ -54,7 +61,7 @@ Now, you can generate the markdown by running peridot with the peridocs reporter
 
 It should output the following markdown:
 
-    ### addMaybe(int $a, int $b): int
+    <h3 id="api-krak-peridocs-addmaybe">addMaybe(int $a, int $b): int</h3>
 
     **Name:** Krak\Peridocs\addMaybe
 

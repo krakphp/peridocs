@@ -11,13 +11,18 @@ final class DocsContext
     private $suitesMap;
     private $functionParser;
     private $formatDocs;
+    private $config;
 
-    public function __construct(FormatDocs $formatDocs = null) {
+    public function __construct(FormatDocs $formatDocs = null, array $config = []) {
         $this->suitesMap = new \SplObjectStorage();
         $this->functionParser = FunctionParser::create();
         $this->formatDocs = $formatDocs ?: new FormatDocs\MarkdownFormatDocs();
+        $this->config = $config;
     }
 
+    public static function setInstance(DocsContext $ctx) {
+        self::$instance = $ctx;
+    }
     public static function getInstance() {
         self::$instance = self::$instance ?: new self();
         return self::$instance;
@@ -58,7 +63,7 @@ final class DocsContext
             $docSuites[] = $this->suitesMap[$suite];
         }
 
-        return $this->formatDocs->formatDocs(new FormatDocsArgs($docSuites));
+        return $this->formatDocs->formatDocs(new FormatDocsArgs($docSuites, $this->config));
     }
 }
 
