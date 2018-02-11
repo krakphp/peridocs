@@ -7,7 +7,7 @@
        "peridot",
        "peridot-plugin",
        "documentation",
-       "auto-generate"
+       "auto-generate",
        "auto-documentation"
    ],
     "authors": [
