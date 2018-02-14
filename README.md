@@ -19,7 +19,8 @@ return function($emitter) {
         return new DocsContext(null, [
             'headerFmt' => '<h3 id="{id}">{signature}</h3>',
             'showLinks' => false,
-            'nsPrefix' => 'Acme\\Prefix\\'
+            'nsPrefix' => 'Acme\\Prefix\\',
+            'numTableRows' => 4,
         ]);
     });
 };

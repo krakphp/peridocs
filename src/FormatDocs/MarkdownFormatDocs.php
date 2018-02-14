@@ -10,9 +10,10 @@ final class MarkdownFormatDocs implements FormatDocs
         $headerFmt = $args->config['headerFmt'] ?? '<h3 id="{id}">{signature}</h3>';
         $showLinks = $args->config['showLinks'] ?? false;
         $nsPrefix = $args->config['nsPrefix'] ?? '';
+        $numTableRows = $args->config['numTableRows'] ?? 4;
         $docSuites = $args->docSuites;
 
-        return ($showLinks ? $this->generateTableLinks($docSuites, $nsPrefix) . "\n\n" : '')
+        return ($showLinks ? $this->generateTableLinks($docSuites, $nsPrefix, $numTableRows) . "\n\n" : '')
             . $this->generateApiContent($docSuites, $headerFmt);
     }
 
@@ -20,8 +21,8 @@ final class MarkdownFormatDocs implements FormatDocs
         return strtolower(str_replace('\\', '-', $docSuite->def->name));
     }
 
-    private function generateTableLinks($docSuites, string $nsPrefix) {
-        $chunks = array_chunk($docSuites, 4);
+    private function generateTableLinks($docSuites, string $nsPrefix, int $numTableRows) {
+        $chunks = array_chunk($docSuites, $numTableRows);
 
         return '<table>' . array_reduce($chunks, function($acc, $chunk) use ($nsPrefix) {
             return $acc . '<tr>' . array_reduce($chunk, function($acc, $docSuite) use ($nsPrefix) {
