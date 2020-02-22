@@ -28,6 +28,6 @@
         "files": ["src/peridocs.php"]
     },
     "require": {
-        "nikic/php-parser": "v4.0-beta1"
+        "nikic/php-parser": "^4.0"
     }
 }
